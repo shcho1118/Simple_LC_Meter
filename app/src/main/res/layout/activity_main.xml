@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/app_name"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/type"
+            android:textSize="25sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/fixed"
+            android:textSize="25sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/result"
+            android:textSize="25sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/type_group"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/type_inductor"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/inductor"
+                    android:textSize="15sp"
+                    android:textStyle="normal" />
+
+                <RadioButton
+                    android:id="@+id/type_capacitor"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/capacitor"
+                    android:textSize="15sp"
+                    android:textStyle="normal" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/fixed_inductor"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_horizontal|center_vertical"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:text="@string/zero"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/fixed_capacitor"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_horizontal|center_vertical"
+                android:inputType="numberDecimal"
+                android:maxLength="10"
+                android:text="@string/zero"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/result_inductor"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/result_capacitor"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="15sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/measure"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/measure"
+            android:textSize="25sp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/calibrate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/calibrate"
+            android:textSize="25sp"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+</LinearLayout>

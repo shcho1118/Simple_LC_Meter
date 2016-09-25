@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Cheapy LC Meter</string>
+    <string name="type">Type</string>
+    <string name="fixed">Fixed</string>
+    <string name="result">Result</string>
+    <string name="inductor">Inductor\n(uH)</string>
+    <string name="capacitor">Capacitor\n(nF)</string>
+    <string name="measure">Measure</string>
+    <string name="calibrate">Calibrate</string>
+    <string name="msg">EXIT?</string>
+    <string name="btn_yes">Yes</string>
+    <string name="btn_no">No</string>
+    <string name="zero">0</string>
+</resources>
+
