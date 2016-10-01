@@ -169,7 +169,8 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/measure"
             android:textSize="25sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:soundEffectsEnabled="false"/>
 
         <Button
             android:id="@+id/calibrate"
@@ -179,7 +180,8 @@
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/calibrate"
             android:textSize="25sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            android:soundEffectsEnabled="false"/>
     </LinearLayout>
 
 </LinearLayout>
