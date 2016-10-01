@@ -133,6 +133,17 @@ public class MainActivity extends Activity {
 
         openAudioDevice();
 
+        AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+        alert.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();     //닫기
+            }
+        });
+        alert.setMessage(R.string.alert);
+        alert.show();
+
+
         measure.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
