@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
     }
 
     private boolean iOrC = true;//true : 인덕터 측정, false : 콘덴서 측정
-    private int refMillibel = -2000;//기준 음량
+    private int refMillibel = -5000;//기준 음량
     private int firstFreq = 1000;
     private int lastFreq = 10000;
     private int midFreq = 10000;
