@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.media.AudioManager;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
@@ -31,7 +32,7 @@ public class MainActivity extends Activity {
     }
 
     private boolean iOrC = true;//true : 인덕터 측정, false : 콘덴서 측정
-    private int refMillibel = -5000;//기준 음량
+    private int refMillibel = -2000;//기준 음량
     private int firstFreq = 1000;
     private int lastFreq = 10000;
     private int midFreq = 10000;
@@ -143,6 +144,7 @@ public class MainActivity extends Activity {
                             }
                         }//3단계, 탐색간격 : 10
                         chart.repaint();
+                        midFreq = minFreq;
                         handler.post(result);
                     }
                 });
@@ -155,12 +157,19 @@ public class MainActivity extends Activity {
         calibrate.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                first = audioLoopback(firstFreq, refMillibel);
-                last = audioLoopback(lastFreq, refMillibel);
-                series.clear();
-                for (int i = firstFreq; i <= lastFreq; i += 1000)
-                    series.add(i, audioLoopback(i, calMillibel(i)));
-                chart.repaint();
+                Thread calibration = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        first = audioLoopback(firstFreq, refMillibel);
+                        last = audioLoopback(lastFreq, refMillibel);
+                        series.clear();
+                        for (int i = firstFreq; i <= lastFreq; i += 1000)
+                            series.add(i, audioLoopback(i, calMillibel(i)));
+                        chart.repaint();
+                    }
+                });
+
+                calibration.start();
             }
         });//주파수음답특성이 선형적이게 조정
 
@@ -212,7 +221,7 @@ public class MainActivity extends Activity {
         renderer.setChartTitle("Frequency Response");
         renderer.setXTitle("Frequency");
         renderer.setYTitle("Response");
-        renderer.setRange(new double[]{1000, 10000, 0, 32768});
+        renderer.setRange(new double[]{firstFreq, lastFreq, 0, 32768});
         renderer.setApplyBackgroundColor(true);
         renderer.setBackgroundColor(Color.WHITE);
         renderer.setMarginsColor(Color.WHITE);
@@ -226,8 +235,8 @@ public class MainActivity extends Activity {
         renderer.setLabelsColor(Color.BLACK);
         renderer.setXLabels(5);
         renderer.setYLabels(5);
-        renderer.setXAxisMin(1000);
-        renderer.setXAxisMax(10000);
+        renderer.setXAxisMin(firstFreq);
+        renderer.setXAxisMax(lastFreq);
         renderer.setYAxisMin(0);
         renderer.setYAxisMax(32768);
         renderer.setClickEnabled(false);

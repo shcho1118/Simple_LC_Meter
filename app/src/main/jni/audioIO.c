@@ -46,6 +46,8 @@ jfloat Java_chosanghoon_cheapylcmeter_MainActivity_getAmplitude(JNIEnv* env, jcl
     float average = 0;
     float inBuffer[VECSAMPS_MONO];
     float totalBuffer[RECORDBUFFERSIZE];
+    memset(pointer->inputBuffer[0], 0, sizeof(pointer->inputBuffer[0]));
+    memset(pointer->inputBuffer[1], 0, sizeof(pointer->inputBuffer[1]));
 
     while(currentSamps < RECORDBUFFERSIZE){
         samps = android_AudioIn(pointer,inBuffer,VECSAMPS_MONO);
@@ -67,13 +69,13 @@ void Java_chosanghoon_cheapylcmeter_MainActivity_genTone(JNIEnv* env, jclass cla
     int freq = frequency;
     int i, j;
     float sine[69][VECSAMPS_MONO];
+    memset(pointer->outputBuffer[0], 0, sizeof(pointer->outputBuffer[0]));
+    memset(pointer->outputBuffer[1], 0, sizeof(pointer->outputBuffer[1]));
 
     for(i = 0; i < 69; ++i){
         for(j = 0; j < VECSAMPS_MONO; ++j){
             sine[i][j] = sinf(2 * M_PI * (VECSAMPS_MONO * i + j) / ((double)SR / freq));
         }
-    }
-    for(i = 0; i < 69; ++i){
         android_AudioOut(pointer,sine[i],VECSAMPS_MONO,millibel);
     }
 }
