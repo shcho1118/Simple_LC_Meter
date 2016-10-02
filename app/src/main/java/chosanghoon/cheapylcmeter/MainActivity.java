@@ -150,40 +150,36 @@ public class MainActivity extends Activity {
                 Thread measurement = new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        double temp;
-                        double min = 32768;
+                        int range = lastFreq - firstFreq;
                         int minFreq = 10000;
+                        int tempFreq;
+                        double min = 32768;
+                        double temp;
 
-                        for (int i = 0; i < 10; ++i) {
-                            temp = audioLoopback(1000 + 1000 * i, calMillibel(1000 + 1000 * i));
-                            series.add(1000 + 1000 * i, temp);
+                        for (int i = 0; i < 4; ++i) {
+                            tempFreq = (int) (firstFreq + i * (range / 3.0));
+                            temp = audioLoopback(tempFreq, calMillibel(tempFreq));
+                            series.add(tempFreq, temp);
                             if (min > temp) {
                                 min = temp;
-                                minFreq = 1000 + 1000 * i;
+                                minFreq = tempFreq;
                             }
-                        }//1단계, 탐색간격 : 1000
+                        }
                         chart.repaint();
                         midFreq = minFreq;
-                        for (int i = 0; i < 20; ++i) {
-                            temp = audioLoopback(midFreq - 1000 + 100 * i, calMillibel(midFreq - 1000 + 100 * i));
-                            series.add(midFreq - 1000 + 100 * i, temp);
-                            if (min > temp) {
-                                min = temp;
-                                minFreq = midFreq - 1000 + 100 * i;
+                        for (int i = 2; i <= 6 ; ++i){
+                            for (int j = 0; j < 5; ++j){
+                                tempFreq = (int) (midFreq + (j - 2) * (range / Math.pow(3, i)));
+                                temp = audioLoopback(tempFreq, calMillibel(tempFreq));
+                                series.add(tempFreq, temp);
+                                if (min > temp){
+                                    min = temp;
+                                    minFreq = tempFreq;
+                                }
                             }
-                        }//2단계, 탐색간격 : 100
-                        chart.repaint();
-                        midFreq = minFreq;
-                        for (int i = 0; i < 20; ++i) {
-                            temp = audioLoopback(midFreq - 100 + 10 * i, calMillibel(midFreq - 100 + 10 * i));
-                            series.add(midFreq - 100 + 10 * i, temp);
-                            if (min > temp) {
-                                min = temp;
-                                minFreq = midFreq - 100 + 10 * i;
-                            }
-                        }//3단계, 탐색간격 : 10
-                        chart.repaint();
-                        midFreq = minFreq;
+                            chart.repaint();
+                            midFreq = minFreq;
+                        }
                         handler.post(result);
                     }
                 });
@@ -320,7 +316,7 @@ public class MainActivity extends Activity {
 
     private double audioLoopback(int freq, int millibel) {
         if ((freq < firstFreq) || (freq > lastFreq))
-            return -1;
+            return 32768 + 1;
 
         genToneThread genTone = new genToneThread();
         getAmpThread getAmp = new getAmpThread();

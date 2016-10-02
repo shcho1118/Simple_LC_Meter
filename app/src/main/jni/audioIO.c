@@ -97,7 +97,7 @@ jfloat Java_chosanghoon_cheapylcmeter_MainActivity_getAmplitude(JNIEnv* env, jcl
 void Java_chosanghoon_cheapylcmeter_MainActivity_genTone(JNIEnv* env, jclass clazz, jint frequency, jint millibel){
     int freq = frequency;
     int i, j;
-    float sine[69][VECSAMPS_MONO];
+    float sine[69][VECSAMPS_MONO];//69 * 64 / 44100 is almost 100ms
     memset(pointer->outputBuffer[0], 0, sizeof(pointer->outputBuffer[0]));
     memset(pointer->outputBuffer[1], 0, sizeof(pointer->outputBuffer[1]));
 
